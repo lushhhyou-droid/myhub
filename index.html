@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <title>MyHub</title>
+</head>
+<body>
+  <header>
+    <h1>✨ MyHub</h1>
+    <nav>
+      <button data-tab="schedule" class="active">📅 Schedule</button>
+      <button data-tab="ideas">💡 Ideas</button>
+      <button data-tab="todos">✅ To-Dos</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="schedule" class="tab active">
+      <div class="toolbar">
+        <input type="date" id="schedDate" />
+        <button id="addEvent">+ Event</button>
+      </div>
+      <div id="eventsList" class="list"></div>
+    </section>
+
+    <section id="ideas" class="tab">
+      <div class="toolbar">
+        <button id="addIdea">+ New Idea</button>
+        <input type="text" id="searchIdeas" placeholder="🔍 Search…" />
+      </div>
+      <div id="ideasList" class="grid"></div>
+    </section>
+
+    <section id="todos" class="tab">
+      <div class="toolbar">
+        <input type="text" id="newTodo" placeholder="Add a task…" />
+        <button id="addTodo">+</button>
+      </div>
+      <div id="todosList" class="list"></div>
+    </section>
+  </main>
+
+  <dialog id="itemModal">
+    <form method="dialog" id="itemForm">
+      <h3 id="modalTitle">New Item</h3>
+      <input type="text" id="itemTitle" placeholder="Title" required />
+      <textarea id="itemBody" placeholder="Details…"></textarea>
+      <input type="datetime-local" id="itemDate" />
+      <input type="text" id="itemTags" placeholder="tags, comma, separated" />
+      <label>Color:
+        <input type="color" id="itemColor" value="#4f46e5" />
+      </label>
+      <div class="actions">
+        <button value="cancel">Cancel</button>
+        <button id="saveBtn" value="save">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

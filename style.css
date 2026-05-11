@@ -1,0 +1,89 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --accent: #4f46e5;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+header {
+  padding: 1rem;
+  background: var(--card);
+  position: sticky; top: 0; z-index: 10;
+}
+
+header h1 { font-size: 1.4rem; margin-bottom: 0.75rem; }
+
+nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+nav button {
+  flex: 1; padding: 0.6rem; border: none;
+  background: transparent; color: var(--muted);
+  border-radius: 8px; cursor: pointer; font-size: 0.9rem;
+}
+nav button.active { background: var(--accent); color: white; }
+
+main { padding: 1rem; max-width: 900px; margin: 0 auto; }
+
+.tab { display: none; }
+.tab.active { display: block; }
+
+.toolbar {
+  display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;
+}
+.toolbar input, .toolbar button {
+  padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid #334155;
+  background: var(--card); color: var(--text); font-size: 0.9rem;
+}
+.toolbar button {
+  background: var(--accent); border: none; cursor: pointer; font-weight: 600;
+}
+
+.list { display: flex; flex-direction: column; gap: 0.5rem; }
+.grid {
+  display: grid; gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.card {
+  background: var(--card); padding: 1rem; border-radius: 12px;
+  border-left: 4px solid var(--accent); cursor: pointer;
+  transition: transform 0.15s;
+}
+.card:hover { transform: translateY(-2px); }
+.card h4 { margin-bottom: 0.4rem; }
+.card p { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.5rem; }
+.card .tags { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.tag {
+  background: rgba(255,255,255,0.1); padding: 0.15rem 0.5rem;
+  border-radius: 99px; font-size: 0.7rem;
+}
+
+.todo-item { display: flex; align-items: center; gap: 0.6rem; }
+.todo-item input[type="checkbox"] { width: 20px; height: 20px; }
+.todo-item.done { opacity: 0.5; text-decoration: line-through; }
+
+dialog {
+  border: none; border-radius: 16px; background: var(--card);
+  color: var(--text); padding: 1.5rem; width: 90%; max-width: 420px;
+}
+dialog::backdrop { background: rgba(0,0,0,0.6); }
+dialog input, dialog textarea {
+  width: 100%; padding: 0.6rem; margin-top: 0.5rem;
+  background: var(--bg); color: var(--text);
+  border: 1px solid #334155; border-radius: 8px; font: inherit;
+}
+dialog textarea { min-height: 80px; resize: vertical; }
+dialog h3 { margin-bottom: 0.5rem; }
+dialog .actions { display: flex; gap: 0.5rem; margin-top: 1rem; justify-content: flex-end; }
+dialog button { padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer; }
+dialog button[value="save"] { background: var(--accent); color: white; }
