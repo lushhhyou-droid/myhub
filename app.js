@@ -1,3 +1,21 @@
+// ===== Password Lock =====
+const PASSWORD_HASH = '18fbd2b6bab93f1d97b8912e86dc9d58f3d7b24fec4866add3e4c7be99cac724';
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function checkAuth() {
+  if (sessionStorage.getItem('authed') === 'yes') return true;
+  const pw = prompt('🔒 Enter password:');
+  if (pw && (await sha256(pw)) === PASSWORD_HASH) {
+    sessionStorage.setItem('authed', 'yes');
+    return true;
+  }
+  document.body.innerHTML = '<h1 style="padding:2rem;color:#f1f5f9;background:#0f172a;height:100vh;font-family:system-ui;">🚫 Access denied</h1>';
+  return false;
+}
 const DB_KEY = 'myhub-data';
 let data = JSON.parse(localStorage.getItem(DB_KEY)) || {
   events: [], ideas: [], todos: []
@@ -126,4 +144,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
 
-render();
+(async () => {
+  if (!(await checkAuth())) return;
+  render();
+})();
